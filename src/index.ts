@@ -1,7 +1,10 @@
 import express from 'express';
-import logger from "../utils/logger";
+import logger from "./utils/logger";
 
+import Database from "./utils/databaseConnection";
 const app = express();
+
+Database.connect();
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
