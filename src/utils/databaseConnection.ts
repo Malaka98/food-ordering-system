@@ -17,6 +17,7 @@ class Database {
     }
 
     public connect(): void {
+        mongoose.set('strictQuery', false)
         const {
             MONGO_USER,
             MONGO_PASSWORD,
@@ -26,11 +27,7 @@ class Database {
         const mongoUrl = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_PATH}`;
 
         mongoose
-            .connect(mongoUrl, {
-                // useNewUrlParser: true,
-                // useUnifiedTopology: true,
-                // useCreateIndex: true,
-            })
+            .connect(mongoUrl)
             .then(() => console.log('MongoDB connected'))
             .catch((err) => console.log(err));
     }
