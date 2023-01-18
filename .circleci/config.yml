@@ -11,4 +11,4 @@ jobs:
           command: npm install
       - run:
           name: Run Tests
-          command: npm lint && test
+          command: npm run lint && test
