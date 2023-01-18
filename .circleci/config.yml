@@ -1,26 +1,17 @@
 version: 2.1
 jobs:
   build:
-    working_directory: ~/app
-    docker:
-      - image: circleci/node:14.15.0
+    working_directory: ~/repo
     steps:
       - checkout
       - run: npm install
-      - run: npm test
+      - run: npm run build
   deploy:
-    working_directory: ~/app
+    working_directory: ~/repo
     steps:
       - checkout
+      - run: npm install
       - run:
           name: Deploy to Heroku
           command: |
             git push https://heroku:59f76567-d0d5-4033-9175-ef20b931f3bf@git.heroku.com/full-stack-backend.git master
-workflows:
-  version: 2
-  build_and_deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
