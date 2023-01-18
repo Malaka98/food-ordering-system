@@ -12,6 +12,7 @@ jobs:
       - run:
           name: Run Tests
           command: npm test
+      - run: curl -sSL https://render.com/install.sh | bash
       - run:
           name: deploy
           command: render deploy
