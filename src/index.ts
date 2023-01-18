@@ -23,16 +23,15 @@ app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
+Database.connect();
 const server = new InversifyExpressServer(container, null, {rootPath: '/api'});
 server.setConfig((app) => {
     // add your express middlewares here
 });
 app.use(server.build());
-Database.connect();
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log('Server listening on port 4000!');
-    logger.info("Server listening on port 4000!")
+    console.log(`Server listening on port ${PORT}!`);
+    logger.info(`Server listening on port ${PORT}!`)
 });

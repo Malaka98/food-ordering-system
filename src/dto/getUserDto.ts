@@ -1,10 +1,19 @@
+import {IsString} from "class-validator";
+
 export class GetUserDto {
+    @IsString()
     public firstName: string
+    @IsString()
     public lastName: string
+    @IsString()
     public username: string
+    @IsString()
     public password: string
+    @IsString()
     public address: string
+    @IsString()
     public phoneNumber: string
+    @IsString()
     public email: string
 
 
