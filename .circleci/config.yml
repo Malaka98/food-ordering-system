@@ -10,5 +10,11 @@ jobs:
           name: Install Dependencies
           command: npm install
       - run:
+          name: Run Eslint
+          command: npm lint
+      - run:
           name: Run Tests
           command: npm test
+      - run:
+          name: deploy
+          command: render deploy
