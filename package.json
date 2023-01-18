@@ -8,7 +8,7 @@
     "start": "node dist/bundle.js",
     "dev": "nodemon --watch src --ext ts --exec npx ts-node src/index.ts",
     "lint": "eslint . --ext .ts --fix",
-    "test": "jest"
+    "test": "jest --forceExit"
   },
   "repository": {
     "type": "git",
