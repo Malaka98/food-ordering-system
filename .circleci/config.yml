@@ -14,5 +14,6 @@ jobs:
           command: npm test
       - run: npm install -g render-cli
       - run:
-          name: deploy
-          command: render deploy
+          name: Deploy to Render
+          command: |
+            curl -X POST -H "Content-Type: application/json" -H "Authorization: Bearer rnd_ZNidmPHjo6gJtazNOtGec4q8PBTz" -d '{"image":"username/fullstack-backend:2"}' https://api.render.com/deploy
