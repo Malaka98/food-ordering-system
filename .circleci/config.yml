@@ -1,9 +1,9 @@
 version: 2.1
 
 jobs:
-  build:
-    docker:
-      - image: node:16.0.0
+  whats-installed:
+    machine: # executor type
+      image: ubuntu-2004:2022.07.1
     steps:
       - checkout
       - run:
