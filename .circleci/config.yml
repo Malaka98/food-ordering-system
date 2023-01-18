@@ -1,18 +1,38 @@
 version: 2.1
+
 jobs:
   build:
-    working_directory: ~/app
     docker:
-      - image: circleci/node:14.15.0
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm test
-  deploy:
-    working_directory: ~/app
+      - image: node:16.0.0
     steps:
       - checkout
       - run:
-          name: Deploy to Heroku
+          name: Install Dependencies
+          command: npm install
+      - run:
+          name: Run Tests
+          command: npm test
+  deploy:
+    docker:
+      - image: cimg/node:lts
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run:
+          name: Deploy Main to Heroku
           command: |
             git push https://heroku:59f76567-d0d5-4033-9175-ef20b931f3bf@git.heroku.com/full-stack-backend.git master
+
+  workflows:
+    version: 2
+    build-deploy:
+    jobs:
+      - build
+      - deploy:
+          requires:
+            - build # only run deploy-via-git job if the build job has completed
+          filters:
+          branches:
+            only: main # only run deploy-via-git job on main branch
