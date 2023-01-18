@@ -2,6 +2,9 @@ import {UserRepositoryImpl} from "../../repositories/impl/userRepositoryImpl";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../../types";
 import {UserService} from "../userService";
+import {LoginDto} from "../../dto/loginDto";
+import {AuthMiddleware} from "../../middlewares/authMiddleware";
+import {GetUserDto} from "../../dto/getUserDto";
 
 @injectable()
 export class UserServiceImpl implements UserService {
@@ -15,6 +18,21 @@ export class UserServiceImpl implements UserService {
     async getUserByIdService(id: string): Promise<any> {
         try {
             return await this.userRepository.getUserById(id)
+        } catch (e) {
+            throw e
+        }
+    }
+
+    async userLoginService(credentials: LoginDto): Promise<any> {
+        try {
+            const value = await this.userRepository.getUserByUsernameAndPassword(credentials)
+            if (value) {
+                const user = new GetUserDto(value.first_name, value.last_name, value.username, value.password, value.address,
+                    value.phone_number, value.email)
+                return AuthMiddleware.generateToken({user})
+            } else {
+                throw new Error("User doesn't exist")
+            }
         } catch (e) {
             throw e
         }

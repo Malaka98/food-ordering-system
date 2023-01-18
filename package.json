@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Malaka98/food-ordering-system#readme",
   "devDependencies": {
     "body-parser": "^1.20.1",
+    "class-validator": "^0.14.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
