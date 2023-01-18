@@ -9,8 +9,8 @@ import {UserService} from "./services/userService";
 
 const container = new Container();
 
-container.bind<UserRepository>(TYPES.UserRepository).to(UserRepositoryImpl)
-container.bind<UserService>(TYPES.UserService).to(UserServiceImpl)
-container.bind<UserController>(TYPES.UserController).to(UserController)
+container.bind<UserRepository>(TYPES.UserRepository).to(UserRepositoryImpl);
+container.bind<UserService>(TYPES.UserService).to(UserServiceImpl);
+container.bind<UserController>(TYPES.UserController).to(UserController);
 
-export {container}
+export {container};

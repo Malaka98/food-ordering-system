@@ -9,32 +9,32 @@ import {GetUserDto} from "../../dto/getUserDto";
 @injectable()
 export class UserServiceImpl implements UserService {
 
-    private userRepository: UserRepositoryImpl;
+  private userRepository: UserRepositoryImpl;
 
-    constructor(@inject(TYPES.UserRepository) userRepository: UserRepositoryImpl) {
-        this.userRepository = userRepository
-    }
+  constructor(@inject(TYPES.UserRepository) userRepository: UserRepositoryImpl) {
+    this.userRepository = userRepository;
+  }
 
-    async getUserByIdService(id: string): Promise<any> {
-        try {
-            return await this.userRepository.getUserById(id)
-        } catch (e) {
-            throw e
-        }
+  async getUserByIdService(id: string): Promise<any> {
+    try {
+      return await this.userRepository.getUserById(id);
+    } catch (e) {
+      throw e;
     }
+  }
 
-    async userLoginService(credentials: LoginDto): Promise<any> {
-        try {
-            const value = await this.userRepository.getUserByUsernameAndPassword(credentials)
-            if (value) {
-                const user = new GetUserDto(value.first_name, value.last_name, value.username, value.password, value.address,
-                    value.phone_number, value.email)
-                return AuthMiddleware.generateToken({user})
-            } else {
-                throw new Error("User doesn't exist")
-            }
-        } catch (e) {
-            throw e
-        }
+  async userLoginService(credentials: LoginDto): Promise<any> {
+    try {
+      const value = await this.userRepository.getUserByUsernameAndPassword(credentials);
+      if (value) {
+        const user = new GetUserDto(value.first_name, value.last_name, value.username, value.password, value.address,
+          value.phone_number, value.email);
+        return AuthMiddleware.generateToken({user});
+      } else {
+        throw new Error("User doesn't exist");
+      }
+    } catch (e) {
+      throw e;
     }
+  }
 }

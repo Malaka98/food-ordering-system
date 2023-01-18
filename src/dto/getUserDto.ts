@@ -2,29 +2,29 @@ import {IsString} from "class-validator";
 
 export class GetUserDto {
     @IsString()
-    public firstName: string
+  public firstName: string;
     @IsString()
-    public lastName: string
+    public lastName: string;
     @IsString()
-    public username: string
+    public username: string;
     @IsString()
-    public password: string
+    public password: string;
     @IsString()
-    public address: string
+    public address: string;
     @IsString()
-    public phoneNumber: string
+    public phoneNumber: string;
     @IsString()
-    public email: string
+    public email: string;
 
 
     constructor(firstName?: string, lastName?: string, username?: string, password?: string,
-                address?: string, phoneNumber?: string, email?: string) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.username = username;
-        this.password = password;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
+      address?: string, phoneNumber?: string, email?: string) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.username = username;
+      this.password = password;
+      this.address = address;
+      this.phoneNumber = phoneNumber;
+      this.email = email;
     }
 }
