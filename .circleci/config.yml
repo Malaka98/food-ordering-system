@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: npm install
+          command: npm ci
       - run:
           name: Test the app
           command: npm test
@@ -26,6 +26,15 @@ jobs:
             echo "The command above installs Heroku, the command below deploys.
             What you do in between is up to you!"
       - heroku/deploy-via-git
+      - run:
+          name: Check Heroku Build
+          command: |
+            if [ "$(heroku status --app $HEROKU_APP_NAME)" == "=== web: up" ]; then
+              echo "Heroku build successful"
+            else
+              echo "Heroku build failed"
+              exit 1
+            fi
 workflows:
   heroku_deploy:
     jobs:
