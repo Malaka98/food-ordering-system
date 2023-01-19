@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Install dependencies
-          command: npm ci
+          command: npm install
       - run:
           name: Test the app
           command: npm test
@@ -30,4 +30,6 @@ workflows:
   heroku_deploy:
     jobs:
       - testing
-      - deploy
+      - deploy:
+          requires:
+            - testing
