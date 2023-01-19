@@ -23,6 +23,7 @@ jobs:
             npm test
 
   heroku/deploy-via-git:
+    executor: heroku/default
     steps:
       - heroku/install
       - heroku/deploy-via-git:
