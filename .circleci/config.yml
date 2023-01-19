@@ -5,13 +5,16 @@ orbs:
 
 jobs:
   heroku/deploy-via-git:
-    executor: heroku/default
+    docker:
+      # replace with your preferred image
+      - image: cimg/base:stable
     steps:
-      - checkout
       - heroku/install
       - heroku/deploy-via-git:
+          api-key: 59f76567-d0d5-4033-9175-ef20b931f3bf
           app-name: full-stack-backend
           branch: master
+          force: false
 workflows:
   version: 2
   heroku_deploy:
