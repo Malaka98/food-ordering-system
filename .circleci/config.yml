@@ -24,9 +24,6 @@ jobs:
       - run:
           name: Run Build
           command: npm run build
-      - run:
-          name: Run Build
-          command: npm start
   deploy:
     docker:
       - image: cimg/node:lts
@@ -40,6 +37,8 @@ jobs:
           command: |
             git branch master
             git push https://heroku:59f76567-d0d5-4033-9175-ef20b931f3bf@git.heroku.com/full-stack-backend.git master
+            npm run build
+            heroku run -a full-stack-backend npm start
 
 workflows:
   version: 2
