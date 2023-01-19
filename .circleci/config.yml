@@ -2,6 +2,20 @@ version: 2.1
 orbs:
   heroku: circleci/heroku@2.0
 jobs:
+  testing:
+    docker:
+      - image: cimg/node:lts
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+    steps:
+      - checkout
+      - run:
+          name: Install dependencies
+          command: npm ci
+      - run:
+          name: Test the app
+          command: npm test
   deploy:
     executor: heroku/default
     steps:
@@ -10,9 +24,10 @@ jobs:
       - run:
           command: >
             echo "The command above installs Heroku, the command below deploys.
-            What you do inbetween is up to you!"
+            What you do in between is up to you!"
       - heroku/deploy-via-git
 workflows:
   heroku_deploy:
     jobs:
+      - testing
       - deploy
