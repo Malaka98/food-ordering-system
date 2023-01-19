@@ -32,6 +32,7 @@ jobs:
       - run:
           name: Deploy Main to Heroku
           command: |
+            git branch master
             git push https://heroku:59f76567-d0d5-4033-9175-ef20b931f3bf@git.heroku.com/full-stack-backend.git master
 
 workflows:
