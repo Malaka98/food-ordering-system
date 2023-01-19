@@ -10,11 +10,7 @@ jobs:
       - image: cimg/base:stable
     steps:
       - heroku/install
-      - heroku/deploy-via-git:
-          api-key: 59f76567-d0d5-4033-9175-ef20b931f3bf
-          app-name: full-stack-backend
-          branch: master
-          force: false
+      - heroku/deploy-via-git
 workflows:
   version: 2
   heroku_deploy:
