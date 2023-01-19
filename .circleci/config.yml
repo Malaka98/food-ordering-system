@@ -8,13 +8,13 @@ jobs:
       - checkout
       - run:
           name: node install
-          command: curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
+          command: sudo curl -sL https://deb.nodesource.com/setup_18.x -o nodesource_setup.sh
       - run:
           name: Install Node
-          command: apt install nodejs
+          command: sudo apt install nodejs
       - run:
           name: Install NPM
-          command: apt install npm
+          command: sudo apt install npm
       - run:
           name: Install Dependencies
           command: npm install
