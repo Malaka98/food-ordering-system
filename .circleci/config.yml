@@ -1,12 +1,17 @@
 version: 2.1
+
 orbs:
   heroku: circleci/heroku@2.0.0
+
 jobs:
   heroku/deploy-via-git:
     executor: heroku/default
     steps:
       - checkout
       - heroku/install
+      - heroku/deploy-via-git:
+          app-name: full-stack-backend
+          branch: master
 workflows:
   version: 2
   heroku_deploy:
