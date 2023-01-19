@@ -41,7 +41,7 @@ jobs:
       - run: npm run build
       - run:
           name: Start the server
-          command: npm start
+          command: npm start || true
           background: true
 
 workflows:
