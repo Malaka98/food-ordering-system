@@ -23,8 +23,6 @@ jobs:
           name: Test Cases
           command: |
             npm test
-        environment:
-          NODE_ENV: test
 
       # Deploy to Heroku
       - heroku-deploy/setup-auth:
