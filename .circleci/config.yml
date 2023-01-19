@@ -1,27 +1,7 @@
-version: 2
-
+version: 2.1
 orbs:
   heroku: circleci/heroku@2.0.0
-
 jobs:
-  run_and_test:
-    docker:
-      # replace with your preferred image
-      - image: circleci/node:latest
-    steps:
-      - checkout
-      # Install dependencies and run tests
-      - run:
-          name: Install and test
-          command: |
-            npm install
-            npm test
-
-      - run:
-          name: Test Cases
-          command: |
-            npm test
-
   heroku/deploy-via-git:
     executor: heroku/default
     steps:
@@ -35,7 +15,6 @@ jobs:
             force: false
 workflows:
   version: 2
-  example-workflow:
+  heroku_deploy:
     jobs:
-      - run_and_test
       - heroku/deploy-via-git
