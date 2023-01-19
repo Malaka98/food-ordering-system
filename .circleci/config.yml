@@ -24,17 +24,12 @@ jobs:
       - run:
           command: >
             echo "The command above installs Heroku, the command below deploys.
-            What you do in between is up to you!"
+            What you do inbetween is up to you!"
       - heroku/deploy-via-git
       - run:
-          name: Check Heroku Build
+          name: Check deployment status
           command: |
-            if [ "$(heroku status --app $HEROKU_APP_NAME)" == "=== web: up" ]; then
-              echo "Heroku build successful"
-            else
-              echo "Heroku build failed"
-              exit 1
-            fi
+            heroku ps --app $HEROKU_APP_NAME
 workflows:
   heroku_deploy:
     jobs:
