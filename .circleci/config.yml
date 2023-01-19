@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  heroku-deploy: circleci/heroku-deploy@3.2.2
+
 jobs:
   build:
     working_directory: ~/app
@@ -16,12 +19,22 @@ jobs:
             npm install
             npm test
 
-      # Deploy to Heroku
       - run:
-          name: Deploy to Heroku
+          name: Test Cases
           command: |
-            git branch master
-            git push https://heroku:59f76567-d0d5-4033-9175-ef20b931f3bf@git.heroku.com/full-stack-backend.git master
+            npm test
+        environment:
+          NODE_ENV: test
+
+      # Deploy to Heroku
+      - heroku-deploy/setup-auth:
+          api-key: 59f76567-d0d5-4033-9175-ef20b931f3bf
+      - heroku-deploy/deploy:
+          app-name: full-stack-backend
+          command: |
+            npm install
+            npm run build
+            npm start
 
 workflows:
   version: 2
