@@ -8,8 +8,17 @@ jobs:
     machine: # executor type
       image: ubuntu-2004:202010-01
     steps:
-      - checkout
-      - heroku/install
+      - run:
+          command: |-
+            #!/bin/bash
+            
+            if ! command -v heroku &> /dev/null; then
+              curl https://cli-assets.heroku.com/install.sh | sh
+            else
+              echo "Heroku is already installed. No operation was performed."
+            fi
+          name: Install Heroku CLI (If not installed)
+
       - run:
           name: Deploy to Heroku
           command: |
