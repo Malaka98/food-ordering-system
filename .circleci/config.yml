@@ -1,5 +1,11 @@
 version: 2.1
 
+environment:
+  HEROKU_API_KEY: 59f76567-d0d5-4033-9175-ef20b931f3bf
+  HEROKU_APP_NAME: full-stack-backend
+  HEROKU_BRANCH: master
+  HEROKU_FORCE: false
+
 orbs:
   heroku: circleci/heroku@2.0.0
 
@@ -10,7 +16,11 @@ jobs:
       - image: cimg/base:stable
     steps:
       - heroku/install
-      - heroku/deploy-via-git
+      - heroku/deploy-via-git:
+          api-key: $HEROKU_API_KEY
+          app-name: $HEROKU_APP_NAME
+          branch: $HEROKU_BRANCH
+          force: $HEROKU_FORCE
 workflows:
   version: 2
   heroku_deploy:
