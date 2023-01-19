@@ -23,7 +23,7 @@ jobs:
           command: npm test
   deploy:
     docker:
-      - image: cimg/node:lts
+      - image: <docker-image-name-tag>
         auth:
           username: rootx98
           password: BEm9ujb4Xn5WUmD  # context / project UI env-var reference
@@ -34,6 +34,8 @@ jobs:
           command: |
             git branch master
             git push https://heroku:59f76567-d0d5-4033-9175-ef20b931f3bf@git.heroku.com/full-stack-backend.git master
+      - run: docker build -t my-app .
+      - run: docker build -t my-app .
 
 workflows:
   version: 2
