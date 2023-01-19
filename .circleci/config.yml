@@ -1,17 +1,15 @@
-version: 2.1
+version: 2
 
 orbs:
-  heroku-deploy: circleci/heroku-deploy@3.2.2
+  heroku: circleci/heroku@2.0.0
 
 jobs:
-  build:
-    working_directory: ~/app
+  run_and_test:
     docker:
+      # replace with your preferred image
       - image: circleci/node:latest
-
     steps:
       - checkout
-
       # Install dependencies and run tests
       - run:
           name: Install and test
@@ -24,18 +22,18 @@ jobs:
           command: |
             npm test
 
-      # Deploy to Heroku
-      - heroku-deploy/setup-auth:
-          api-key: 59f76567-d0d5-4033-9175-ef20b931f3bf
-      - heroku-deploy/deploy:
-          app-name: full-stack-backend
-          command: |
-            npm install
-            npm run build
-            npm start
-
+  heroku/deploy-via-git:
+    steps:
+      - heroku/install
+      - heroku/deploy-via-git:
+          environment:
+            api-key: 59f76567-d0d5-4033-9175-ef20b931f3bf
+            app-name: full-stack-backend
+            branch: master
+            force: false
 workflows:
   version: 2
-  build_and_deploy:
+  example-workflow:
     jobs:
-      - build
+      - run_and_test
+      - heroku/deploy-via-git
