@@ -1,30 +1,18 @@
 version: 2.1
-
 orbs:
-  heroku: circleci/heroku@2.0.0
-
+  heroku: circleci/heroku@2.0
 jobs:
-  heroku/deploy-via-git:
-    machine: # executor type
-      image: ubuntu-2004:202010-01
+  deploy:
+    executor: heroku/default
     steps:
+      - checkout
+      - heroku/install
       - run:
-          command: |-
-            #!/bin/bash
-            
-            if ! command -v heroku &> /dev/null; then
-              curl https://cli-assets.heroku.com/install.sh | sh
-            else
-              echo "Heroku is already installed. No operation was performed."
-            fi
-          name: Install Heroku CLI (If not installed)
-
-      - run:
-          name: Deploy to Heroku
-          command: |
-            git push heroku main
+          command: >
+            echo "The command above installs Heroku, the command below deploys.
+            What you do inbetween is up to you!"
+      - heroku/deploy-via-git
 workflows:
-  version: 2
   heroku_deploy:
     jobs:
-      - heroku/deploy-via-git
+      - deploy
