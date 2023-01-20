@@ -16,9 +16,6 @@ jobs:
       - run:
           name: Test the app
           command: npm test
-      # run tests and store XML files to a subdirectory, for example, test-results
-      - store_test_results:
-          path: test-results
   deploy:
     executor: heroku/default
     steps:
@@ -27,7 +24,7 @@ jobs:
       - run:
           command: >
             echo "The command above installs Heroku, the command below deploys.
-            What you do inbetween is up to you!"
+            What you do in between is up to you!"
       - heroku/deploy-via-git
       - run:
           name: Check deployment status

@@ -1,3 +1,5 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/Malaka98/food-ordering-system/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Malaka98/food-ordering-system/tree/main)
+
 # **Full Stack Project Backend**
 
 ### This web service has been developed using Express
