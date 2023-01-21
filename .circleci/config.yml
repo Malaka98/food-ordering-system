@@ -27,15 +27,14 @@ jobs:
             What you do in between is up to you!"
       #      - heroku/deploy-via-git
       - run:
-          command: >
-            sudo - heroku/release-docker-image
-
-      - run:
           name: Give permissions to Docker daemon
           command: >
             sudo chmod 666 /var/run/docker.sock
-
-      - heroku ps --app $HEROKU_APP_NAME
+      - heroku/release-docker-image
+      - run:
+          name: Give permissions to Docker daemon
+          command: >
+            heroku ps --app $HEROKU_APP_NAME
 workflows:
   heroku_deploy:
     jobs:
