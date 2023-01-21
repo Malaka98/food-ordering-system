@@ -29,10 +29,13 @@ jobs:
       - run:
           command: >
             sudo - heroku/release-docker-image
+
       - run:
-          name: Check deployment status
-          command: |
-            heroku ps --app $HEROKU_APP_NAME
+          name: Give permissions to Docker daemon
+          command: >
+            sudo chmod 666 /var/run/docker.sock
+
+      - heroku ps --app $HEROKU_APP_NAME
 workflows:
   heroku_deploy:
     jobs:
