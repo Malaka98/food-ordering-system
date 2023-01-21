@@ -26,7 +26,9 @@ jobs:
             echo "The command above installs Heroku, the command below deploys.
             What you do in between is up to you!"
       #      - heroku/deploy-via-git
-      - heroku/release-docker-image
+      - run:
+          command: >
+            sudo heroku/release-docker-image
       - run:
           name: Check deployment status
           command: |
