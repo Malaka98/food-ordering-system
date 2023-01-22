@@ -15,7 +15,7 @@ jobs:
           command: npm install
       - run:
           name: Linting
-          command: eslint . --ext .js --format checkstyle -o eslint-result.xml
+          command: eslint . --ext .ts --format checkstyle -o eslint-result.xml
       - store_artifacts:
           path: eslint-result.xml
       - run:
