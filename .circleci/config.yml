@@ -28,7 +28,7 @@ jobs:
       - run:
           name: Set the stack of your app to container
           command: |
-            heroku stack:set container
+            heroku stack:set container --app $HEROKU_APP_NAME
       - heroku/deploy-via-git
       - run:
           name: Check deployment status
