@@ -25,6 +25,10 @@ jobs:
           command: >
             echo "The command above installs Heroku, the command below deploys.
             What you do in between is up to you!"
+      - run:
+          name: Set the stack of your app to container
+          command: |
+            heroku stack:set container
       - heroku/deploy-via-git
       - run:
           name: Check deployment status
