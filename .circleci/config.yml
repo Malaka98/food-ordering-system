@@ -33,7 +33,7 @@ jobs:
           name: Test the app
           command: npm test
       - store_test_results:
-          path: test-results
+          path: test
   deploy:
     executor: heroku/default
     steps:
