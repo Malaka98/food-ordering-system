@@ -15,7 +15,9 @@ jobs:
           command: npm install
       - run:
           name: Linting
-          command: npm run lint
+          command: |
+            npm run lint
+            mkdir /eslint-result
       - store_artifacts:
           path: /eslint-result
           destination: eslint-result.xml
