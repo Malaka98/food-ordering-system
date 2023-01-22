@@ -15,5 +15,4 @@ build:
     MONGO_USER: $MONGO_USER
     NPM_CONFIG_PRODUCTION: $NPM_CONFIG_PRODUCTION
 run:
-  web: Dockerfile
-  worker: worker/Dockerfile
+  web: bundle exec puma -C config/puma.rb
