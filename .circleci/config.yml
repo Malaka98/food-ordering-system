@@ -20,7 +20,7 @@ jobs:
             mkdir /eslint-result
       - store_artifacts:
           path: /eslint-result
-          destination: eslint-result.xml
+          destination: eslint-result
       - run:
           name: Check Code quality
           command: |
