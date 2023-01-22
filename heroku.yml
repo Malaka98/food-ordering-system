@@ -12,5 +12,3 @@ build:
     MONGO_PASSWORD: $MONGO_PASSWORD
     MONGO_PATH: cluster0.6pjjs4p.mongodb.net/foodSystem?retryWrites=true&w=majority
     MONGO_USER: rootx
-run:
-  web: bundle exec puma -C config/puma.rb
