@@ -17,7 +17,8 @@ jobs:
           name: Linting
           command: npm run lint
       - store_artifacts:
-          path: eslint-result.xml
+          path: /eslint-result
+          destination: eslint-result.xml
       - run:
           name: Check Code quality
           command: |
