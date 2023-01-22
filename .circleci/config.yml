@@ -14,6 +14,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
+          name: Eslint
+          command: npm run lint
+      - run:
           name: Test the app
           command: npm test
   deploy:

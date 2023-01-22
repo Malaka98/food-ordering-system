@@ -11,10 +11,10 @@ import {container} from "./inversify.config";
 
 require("dotenv").config();
 const corsOptions = {
-    origin: "http://localhost:4200",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    optionsSuccessStatus: 200,
+  origin: "http://localhost:4200",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 200,
 };
 
 export const app = express();
@@ -26,12 +26,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 Database.connect();
 const server = new InversifyExpressServer(container, null, {rootPath: "/api"});
 server.setConfig((app) => {
-    // add your express middlewares here
+  // add your express middlewares here
 });
 app.use(server.build());
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}!`);
-    logger.info(`Server listening on port ${PORT}!`);
+  console.log(`Server listening on port ${PORT}!`);
+  logger.info(`Server listening on port ${PORT}!`);
 });
