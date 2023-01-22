@@ -33,7 +33,7 @@ jobs:
       - run:
           name: Check deployment status
           command: |
-            heroku ps -app $HEROKU_APP_NAME
+            heroku ps --app $HEROKU_APP_NAME
 workflows:
   heroku_deploy:
     jobs:
