@@ -25,7 +25,7 @@ class Database {
 
     mongoose
       .connect(mongoUrl)
-      .then(() => console.log("MongoDB connected"))
+      .then(() => {console.log("MongoDB connected");})
       .catch((err) => console.log(err));
   }
 }

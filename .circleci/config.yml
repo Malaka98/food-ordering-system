@@ -14,8 +14,20 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Eslint
-          command: npm run lint
+          name: Linting
+          command: eslint . --ext .js --format checkstyle -o eslint-result.xml
+                     - store_artifacts:
+                     path: eslint-result.xml
+      - run:
+          name: Check Code quality
+          command: |
+            if [ -s eslint-result.xml ]; then
+              echo "Linting errors found, failing the build."
+              exit 1
+            else
+              echo "Linting passed, continuing the build."
+              # rest of the commands to build and test the project
+            fi
       - run:
           name: Test the app
           command: npm test
@@ -24,10 +36,6 @@ jobs:
     steps:
       - checkout
       - heroku/install
-      - run:
-          command: >
-            echo "The command above installs Heroku, the command below deploys.
-            What you do in between is up to you!"
       - run:
           name: Set the stack of your app to container
           command: |

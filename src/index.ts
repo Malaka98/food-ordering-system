@@ -9,7 +9,9 @@ import logger from "./utils/logger";
 import Database from "./utils/databaseConnection";
 import {container} from "./inversify.config";
 
-require("dotenv").config();
+import {config} from "dotenv";
+
+config();
 const corsOptions = {
   origin: "http://localhost:4200",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",

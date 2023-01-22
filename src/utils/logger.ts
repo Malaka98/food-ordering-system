@@ -10,7 +10,7 @@ const logger = createLogger({
     label({}),
     timestamp(),
     formatLog,
-    prettyPrint()
+    prettyPrint(),
   ),
   transports: [
     new transports.File({filename: "error.log", level: "error", format: format.json()}),
@@ -22,7 +22,7 @@ if (process.env.NODE_ENV !== "production") {
   logger.add(
     new transports.Console({
       format: format.simple(),
-    })
+    }),
   );
 }
 
