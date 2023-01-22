@@ -13,12 +13,12 @@ jobs:
       - run:
           name: Install dependencies
           command: npm install
-      #      - run:
-      #          name: Linting
-      #          command: |
-      #            npm run lint
-      #      - store_artifacts:
-      #          path: /eslint-result.xml
+                     - run:
+                     name: Linting
+                     command: |
+                       npm run lint
+                       - store_artifacts:
+                           path: /code_quality_result/eslint-result.xml
       #      - run:
       #          name: Check Code quality
       #          command: |
@@ -33,7 +33,7 @@ jobs:
           name: Test the app
           command: npm test
       - store_test_results:
-          path: test
+          path: test-results
   deploy:
     executor: heroku/default
     steps:
