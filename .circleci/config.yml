@@ -14,9 +14,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Linting -o eslint-result.xml
+          name: Linting
           command: |
-            npm run lint
+            eslint . --ext .ts --fix --format checkstyle -o eslint-result.xml
             mkdir /eslint-result
       - store_artifacts:
           path: /eslint-result
