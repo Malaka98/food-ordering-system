@@ -16,7 +16,7 @@ jobs:
       - run:
           name: Linting
           command: |
-            npm eslint . --ext .ts --fix --format checkstyle -o eslint-result.xml
+            npm run lint --format checkstyle -o eslint-result.xml
             mkdir /eslint-result
       - store_artifacts:
           path: /eslint-result
