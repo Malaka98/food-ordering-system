@@ -18,12 +18,12 @@ jobs:
           command: |
             npm run lint
       - store_artifacts:
-          path: /code_quality_result/eslint-result.xml
+          path: ./code_quality_result
       - run:
           name: Test the app
           command: npm test
       - store_test_results:
-          path: test-results
+          path: ./test-results
   deploy:
     executor: heroku/default
     steps:
