@@ -21,5 +21,4 @@ RUN npm run build
 #EXPOSE $PROT
 
 # Start the application
-#CMD ["npm", "run", "build"]
 CMD ["npm", "run", "start"]
