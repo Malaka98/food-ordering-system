@@ -7,4 +7,6 @@ export interface UserRepository {
     getUserByUsernameAndPassword(credentials: LoginDto): Promise<any>
 
     addUser(userModel: typeof user): Promise<any>
+
+    deleteUserByEmail(email: string): Promise<any>
 }

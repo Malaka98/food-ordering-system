@@ -3,6 +3,7 @@ import express from "express";
 import {
     BaseHttpController,
     controller,
+    httpDelete,
     httpGet,
     httpPost,
     request,
@@ -58,6 +59,19 @@ export class UserController extends BaseHttpController {
     public async addUserController(@requestBody() user: GetUserDto, @response() res: express.Response) {
         try {
             const result = await this.userService.addUserService(user)
+            this.statusCode(200);
+            return this.json({message: result});
+        } catch (e) {
+            this.statusCode(500);
+            return this.json({message: e.message});
+        }
+    }
+
+    @httpDelete("/:email")
+    public async deleteUserByEmailController(@request() req: express.Request, @response() res: express.Response) {
+        try {
+            const email: string = req.params.email;
+            const result = await this.userService.deleteUserByEmailService(email)
             this.statusCode(200);
             return this.json({message: result});
         } catch (e) {

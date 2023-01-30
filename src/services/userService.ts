@@ -7,4 +7,6 @@ export interface UserService {
     userLoginService(credentials: LoginDto): Promise<any>
 
     addUserService(user: GetUserDto): Promise<any>
+
+    deleteUserByEmailService(email: string): Promise<any>
 }

@@ -16,6 +16,14 @@ export class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
+    async deleteUserByEmailService(email: string): Promise<any> {
+        try {
+            return await this.userRepository.deleteUserByEmail(email)
+        } catch (e) {
+            throw e;
+        }
+    }
+
     async getUserByIdService(id: string): Promise<any> {
         try {
             return await this.userRepository.getUserById(id);

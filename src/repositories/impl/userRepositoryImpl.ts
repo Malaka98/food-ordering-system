@@ -7,6 +7,13 @@ import {LoginDto} from "../../dto/loginDto";
 
 @injectable()
 export class UserRepositoryImpl implements UserRepository {
+    async deleteUserByEmail(email: string): Promise<any> {
+        try {
+            return await user.deleteOne({email: email});
+        } catch (e) {
+            throw e;
+        }
+    }
 
     async getUserById(id: string): Promise<any> {
         try {
