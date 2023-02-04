@@ -3,7 +3,7 @@ import {ObjectId} from "mongodb";
 
 import {user} from "../../model/user";
 import {UserRepository} from "../userRepository";
-import {LoginDto} from "../../../foodModule/dto/loginDto";
+import {LoginDto} from "../../dto/loginDto";
 
 @injectable()
 export class UserRepositoryImpl implements UserRepository {

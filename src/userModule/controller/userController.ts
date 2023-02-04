@@ -2,7 +2,7 @@ import {inject} from "inversify";
 import {BaseHttpController, controller, httpDelete, httpGet, httpPost, requestBody} from "inversify-express-utils";
 import {TYPES} from "../../types";
 import {AuthMiddleware} from "../../middlewares/authMiddleware";
-import {LoginDto} from "../../foodModule/dto/loginDto";
+import {LoginDto} from "../dto/loginDto";
 import {SetUserDto} from "../dto/setUserDto";
 import express from "express";
 import {UserService} from "../service/userService";

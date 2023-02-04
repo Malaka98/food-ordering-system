@@ -2,7 +2,7 @@ import {UserRepositoryImpl} from "../../repository/impl/userRepositoryImpl";
 import {inject, injectable} from "inversify";
 import {TYPES} from "../../../types";
 import {UserService} from "../userService";
-import {LoginDto} from "../../../foodModule/dto/loginDto";
+import {LoginDto} from "../../dto/loginDto";
 import {AuthMiddleware} from "../../../middlewares/authMiddleware";
 import {SetUserDto} from "../../dto/setUserDto";
 import {user} from "../../model/user";

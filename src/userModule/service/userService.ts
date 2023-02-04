@@ -1,4 +1,4 @@
-import {LoginDto} from "../../foodModule/dto/loginDto";
+import {LoginDto} from "../dto/loginDto";
 import {SetUserDto} from "../dto/setUserDto";
 
 export interface UserService {

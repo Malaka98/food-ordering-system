@@ -1,7 +1,5 @@
-import {food} from "../model/food";
-
 export interface FoodRepository {
-    addFood(foodModel: typeof food): Promise<any>
+    addFood(foodModel: any): Promise<any>
 
     getAllFood(): Promise<any>
 
