@@ -6,11 +6,11 @@ import {TYPES} from "../../../types";
 @injectable()
 export class FoodServiceImpl implements FoodService {
 
-    private foodRepository: FoodRepository
+  private foodRepository: FoodRepository;
 
-    constructor(@inject(TYPES.FoodRepository) foodRepository: FoodRepository) {
-        this.foodRepository = foodRepository
-    }
+  constructor(@inject(TYPES.FoodRepository) foodRepository: FoodRepository) {
+    this.foodRepository = foodRepository;
+  }
 
 
 }

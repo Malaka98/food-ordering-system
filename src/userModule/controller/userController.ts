@@ -27,7 +27,7 @@ export class UserController extends BaseHttpController {
     }
 
     @httpPost("/login")
-    public async logIn(@requestBody() credentials: LoginDto, @response() res: express.Response) {
+    public async logIn(@requestBody() credentials: LoginDto, @response() res: express.Response): Promise<any> {
         try {
             const token = await this.userService.userLoginService(credentials);
             this.httpContext.response.cookie("access_token", token, {
@@ -35,17 +35,17 @@ export class UserController extends BaseHttpController {
                 sameSite: "none",
                 path: "/api",
             });
-            return this.json({message: "Ok"}, 200)
+            return this.json({message: "Ok"}, 200);
         } catch (e) {
             return this.json({message: e.message}, 500);
         }
     }
 
     @httpGet("/:userId", AuthMiddleware.authenticate)
-    public async getUserByIdController(@request() req: express.Request, @response() res: express.Response) {
+    public async getUserByIdController(@request() req: express.Request, @response() res: express.Response): Promise<any> {
         try {
             // const id: string = req.params.userId;
-            const id: string = this.httpContext.request.params.userId
+            const id: string = this.httpContext.request.params.userId;
             const user = await this.userService.getUserByIdService(id);
             return this.json({message: user}, 200);
         } catch (e: any) {
@@ -54,9 +54,9 @@ export class UserController extends BaseHttpController {
     }
 
     @httpPost("/")
-    public async addUserController(@requestBody() user: SetUserDto, @response() res: express.Response) {
+    public async addUserController(@requestBody() user: SetUserDto, @response() res: express.Response): Promise<any> {
         try {
-            const result = await this.userService.addUserService(user)
+            const result = await this.userService.addUserService(user);
             return this.json({message: result}, 200);
         } catch (e) {
             return this.json({message: e.message}, 500);
@@ -64,11 +64,11 @@ export class UserController extends BaseHttpController {
     }
 
     @httpDelete("/:email")
-    public async deleteUserByEmailController(@request() req: express.Request, @response() res: express.Response) {
+    public async deleteUserByEmailController(@request() req: express.Request, @response() res: express.Response): Promise<any> {
         try {
             // const email: string = req.params.email;
-            const email: string = this.httpContext.request.params.email
-            const result = await this.userService.deleteUserByEmailService(email)
+            const email: string = this.httpContext.request.params.email;
+            const result = await this.userService.deleteUserByEmailService(email);
             return this.json({message: result}, 200);
         } catch (e) {
             return this.json({message: e.message}, 500);
@@ -76,13 +76,13 @@ export class UserController extends BaseHttpController {
     }
 
     @httpGet("/", AuthMiddleware.authenticate)
-    public async isLogged(@request() req: express.Request, @response() res: express.Response) {
+    public async isLogged(@request() req: express.Request, @response() res: express.Response): Promise<any> {
         try {
-            const user = this.httpContext.request.user
+            const user = this.httpContext.request.user;
             if (user) {
-                return this.json({message: user}, 200)
+                return this.json({message: user}, 200);
             }
-            return this.badRequest()
+            return this.badRequest();
         } catch (e) {
             return this.json({message: e.message}, 500);
         }

@@ -6,19 +6,19 @@ import express from "express";
 
 @controller("/food")
 export class FoodController extends BaseHttpController {
-    private foodService: FoodService
+  private foodService: FoodService;
 
-    constructor(@inject(TYPES.FoodService) foodService: FoodService) {
-        super();
-        this.foodService = foodService
-    }
+  constructor(@inject(TYPES.FoodService) foodService: FoodService) {
+    super();
+    this.foodService = foodService;
+  }
 
     @httpPost("/")
-    public async getAllFoodsController(@request() req: express.Request, @response() res: express.Response) {
-        try {
+  public async getAllFoodsController(@request() req: express.Request, @response() res: express.Response) {
+    try {
 
-        } catch (e) {
-            return this.json({message: e.message}, 500);
-        }
+    } catch (e) {
+      return this.json({message: e.message}, 500);
     }
+  }
 }

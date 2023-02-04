@@ -15,10 +15,10 @@ import FoodModule from "./foodModule/foodModule";
 
 config();
 const corsOptions = {
-    origin: "http://localhost:4200",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    credentials: true,
-    optionsSuccessStatus: 200,
+  origin: "http://localhost:4200",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+  optionsSuccessStatus: 200,
 };
 
 export const app = express();
@@ -29,22 +29,22 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 Database.connect();
 
-const container = new Container()
-container.load(UserModule, FoodModule)
+const container = new Container();
+container.load(UserModule, FoodModule);
 
 const server = new InversifyExpressServer(container, null, {rootPath: "/api"});
 server.setConfig((app) => {
-    // add your express middlewares here
-    // add body parser
-    app.use(bodyParser.urlencoded({
-        extended: true
-    }));
-    app.use(bodyParser.json());
+  // add your express middlewares here
+  // add body parser
+  app.use(bodyParser.urlencoded({
+    extended: true,
+  }));
+  app.use(bodyParser.json());
 });
 app.use(server.build());
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}!`);
-    logger.info(`Server listening on port ${PORT}!`);
+  console.log(`Server listening on port ${PORT}!`);
+  logger.info(`Server listening on port ${PORT}!`);
 });

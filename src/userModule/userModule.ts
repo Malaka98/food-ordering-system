@@ -8,9 +8,9 @@ import {UserService} from "./service/userService";
 import {TYPES} from "../types";
 
 const UserModule = new ContainerModule((bind: interfaces.Bind) => {
-    bind<UserRepository>(TYPES.UserRepository).to(UserRepositoryImpl);
-    bind<UserService>(TYPES.UserService).to(UserServiceImpl);
-    bind<UserController>(TYPES.UserController).to(UserController);
-})
+  bind<UserRepository>(TYPES.UserRepository).to(UserRepositoryImpl);
+  bind<UserService>(TYPES.UserService).to(UserServiceImpl);
+  bind<UserController>(TYPES.UserController).to(UserController);
+});
 
-export default UserModule
+export default UserModule;

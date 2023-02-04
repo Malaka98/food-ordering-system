@@ -7,9 +7,9 @@ import {FoodServiceImpl} from "./services/impl/foodServiceImpl";
 import {FoodController} from "./controllers/foodController";
 
 const FoodModule = new ContainerModule((bind: interfaces.Bind) => {
-    bind<FoodRepository>(TYPES.FoodRepository).to(FoodRepositoryImpl);
-    bind<FoodService>(TYPES.FoodService).to(FoodServiceImpl);
-    bind<FoodController>(TYPES.FoodController).to(FoodController);
-})
+  bind<FoodRepository>(TYPES.FoodRepository).to(FoodRepositoryImpl);
+  bind<FoodService>(TYPES.FoodService).to(FoodServiceImpl);
+  bind<FoodController>(TYPES.FoodController).to(FoodController);
+});
 
-export default FoodModule
+export default FoodModule;
