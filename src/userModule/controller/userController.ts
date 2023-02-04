@@ -1,33 +1,23 @@
 import {inject} from "inversify";
-import express from "express";
-import {
-    BaseHttpController,
-    controller,
-    httpDelete,
-    httpGet,
-    httpPost,
-    request,
-    requestBody,
-    response,
-} from "inversify-express-utils";
-
-import {UserServiceImpl} from "../service/impl/userServiceImpl";
+import {BaseHttpController, controller, httpDelete, httpGet, httpPost, requestBody} from "inversify-express-utils";
 import {TYPES} from "../../types";
 import {AuthMiddleware} from "../../middlewares/authMiddleware";
 import {LoginDto} from "../../foodModule/dto/loginDto";
 import {SetUserDto} from "../dto/setUserDto";
+import express from "express";
+import {UserService} from "../service/userService";
 
 @controller("/user")
 export class UserController extends BaseHttpController {
-    private userService: UserServiceImpl;
+    private userService: UserService;
 
-    constructor(@inject(TYPES.UserService) userService: UserServiceImpl) {
+    constructor(@inject(TYPES.UserService) userService: UserService) {
         super();
         this.userService = userService;
     }
 
     @httpPost("/login")
-    public async logIn(@requestBody() credentials: LoginDto, @response() res: express.Response): Promise<any> {
+    public async logIn(@requestBody() credentials: LoginDto): Promise<express.Response> {
         try {
             const token = await this.userService.userLoginService(credentials);
             this.httpContext.response.cookie("access_token", token, {
@@ -42,7 +32,7 @@ export class UserController extends BaseHttpController {
     }
 
     @httpGet("/:userId", AuthMiddleware.authenticate)
-    public async getUserByIdController(@request() req: express.Request, @response() res: express.Response): Promise<any> {
+    public async getUserByIdController(): Promise<express.Response> {
         try {
             // const id: string = req.params.userId;
             const id: string = this.httpContext.request.params.userId;
@@ -54,7 +44,7 @@ export class UserController extends BaseHttpController {
     }
 
     @httpPost("/")
-    public async addUserController(@requestBody() user: SetUserDto, @response() res: express.Response): Promise<any> {
+    public async addUserController(@requestBody() user: SetUserDto): Promise<express.Response> {
         try {
             const result = await this.userService.addUserService(user);
             return this.json({message: result}, 200);
@@ -64,7 +54,7 @@ export class UserController extends BaseHttpController {
     }
 
     @httpDelete("/:email")
-    public async deleteUserByEmailController(@request() req: express.Request, @response() res: express.Response): Promise<any> {
+    public async deleteUserByEmailController(): Promise<express.Response> {
         try {
             // const email: string = req.params.email;
             const email: string = this.httpContext.request.params.email;
@@ -76,7 +66,7 @@ export class UserController extends BaseHttpController {
     }
 
     @httpGet("/", AuthMiddleware.authenticate)
-    public async isLogged(@request() req: express.Request, @response() res: express.Response): Promise<any> {
+    public async isLogged(): Promise<express.Response> {
         try {
             const user = this.httpContext.request.user;
             if (user) {
