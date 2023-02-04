@@ -20,7 +20,7 @@ class Database {
       MONGO_PASSWORD,
       MONGO_PATH,
     } = process.env;
-    console.log(MONGO_USER);
+
     const mongoUrl = `mongodb+srv://${MONGO_USER}:${MONGO_PASSWORD}@${MONGO_PATH}`;
 
     mongoose

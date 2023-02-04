@@ -1,4 +1,4 @@
-import {LoginDto} from "../dto/loginDto";
+import {LoginDto} from "../../foodModule/dto/loginDto";
 import {user} from "../model/user";
 
 export interface UserRepository {

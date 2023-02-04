@@ -1,12 +1,12 @@
-import {LoginDto} from "../dto/loginDto";
-import {GetUserDto} from "../dto/getUserDto";
+import {LoginDto} from "../../foodModule/dto/loginDto";
+import {SetUserDto} from "../dto/setUserDto";
 
 export interface UserService {
     getUserByIdService(id: string): Promise<any>;
 
     userLoginService(credentials: LoginDto): Promise<any>
 
-    addUserService(user: GetUserDto): Promise<any>
+    addUserService(user: SetUserDto): Promise<any>
 
     deleteUserByEmailService(email: string): Promise<any>
 }

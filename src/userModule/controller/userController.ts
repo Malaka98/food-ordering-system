@@ -11,11 +11,11 @@ import {
     response,
 } from "inversify-express-utils";
 
-import {UserServiceImpl} from "../services/impl/userServiceImpl";
-import {TYPES} from "../types";
-import {AuthMiddleware} from "../middlewares/authMiddleware";
-import {LoginDto} from "../dto/loginDto";
-import {GetUserDto} from "../dto/getUserDto";
+import {UserServiceImpl} from "../service/impl/userServiceImpl";
+import {TYPES} from "../../types";
+import {AuthMiddleware} from "../../middlewares/authMiddleware";
+import {LoginDto} from "../../foodModule/dto/loginDto";
+import {SetUserDto} from "../dto/setUserDto";
 
 @controller("/user")
 export class UserController extends BaseHttpController {
@@ -35,48 +35,56 @@ export class UserController extends BaseHttpController {
                 sameSite: "none",
                 path: "/api",
             });
-            return this.ok();
+            return this.json({message: "Ok"}, 200)
         } catch (e) {
-            this.statusCode(500);
-            return this.json({message: e.message});
+            return this.json({message: e.message}, 500);
         }
     }
 
     @httpGet("/:userId", AuthMiddleware.authenticate)
     public async getUserByIdController(@request() req: express.Request, @response() res: express.Response) {
         try {
-            const id: string = req.params.userId;
+            // const id: string = req.params.userId;
+            const id: string = this.httpContext.request.params.userId
             const user = await this.userService.getUserByIdService(id);
-            this.statusCode(200);
-            return this.json({message: user});
+            return this.json({message: user}, 200);
         } catch (e: any) {
-            this.statusCode(500);
-            return this.json({message: e.message});
+            return this.json({message: e.message}, 500);
         }
     }
 
     @httpPost("/")
-    public async addUserController(@requestBody() user: GetUserDto, @response() res: express.Response) {
+    public async addUserController(@requestBody() user: SetUserDto, @response() res: express.Response) {
         try {
             const result = await this.userService.addUserService(user)
-            this.statusCode(200);
-            return this.json({message: result});
+            return this.json({message: result}, 200);
         } catch (e) {
-            this.statusCode(500);
-            return this.json({message: e.message});
+            return this.json({message: e.message}, 500);
         }
     }
 
     @httpDelete("/:email")
     public async deleteUserByEmailController(@request() req: express.Request, @response() res: express.Response) {
         try {
-            const email: string = req.params.email;
+            // const email: string = req.params.email;
+            const email: string = this.httpContext.request.params.email
             const result = await this.userService.deleteUserByEmailService(email)
-            this.statusCode(200);
-            return this.json({message: result});
+            return this.json({message: result}, 200);
         } catch (e) {
-            this.statusCode(500);
-            return this.json({message: e.message});
+            return this.json({message: e.message}, 500);
+        }
+    }
+
+    @httpGet("/", AuthMiddleware.authenticate)
+    public async isLogged(@request() req: express.Request, @response() res: express.Response) {
+        try {
+            const user = this.httpContext.request.user
+            if (user) {
+                return this.json({message: user}, 200)
+            }
+            return this.badRequest()
+        } catch (e) {
+            return this.json({message: e.message}, 500);
         }
     }
 

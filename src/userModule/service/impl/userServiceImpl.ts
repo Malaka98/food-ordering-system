@@ -1,11 +1,12 @@
-import {UserRepositoryImpl} from "../../repositories/impl/userRepositoryImpl";
+import {UserRepositoryImpl} from "../../repository/impl/userRepositoryImpl";
 import {inject, injectable} from "inversify";
-import {TYPES} from "../../types";
+import {TYPES} from "../../../types";
 import {UserService} from "../userService";
-import {LoginDto} from "../../dto/loginDto";
-import {AuthMiddleware} from "../../middlewares/authMiddleware";
-import {GetUserDto} from "../../dto/getUserDto";
+import {LoginDto} from "../../../foodModule/dto/loginDto";
+import {AuthMiddleware} from "../../../middlewares/authMiddleware";
+import {SetUserDto} from "../../dto/setUserDto";
 import {user} from "../../model/user";
+import {GetUserDto} from "../../dto/getUserDto";
 
 @injectable()
 export class UserServiceImpl implements UserService {
@@ -36,18 +37,18 @@ export class UserServiceImpl implements UserService {
         try {
             const value = await this.userRepository.getUserByUsernameAndPassword(credentials);
             if (value) {
-                const user = new GetUserDto(value.first_name, value.last_name, value.username, value.password, value.address,
-                    value.phone_number, value.email);
+                const user = new GetUserDto(value._id, value.first_name, value.last_name, value.username, value.address,
+                    value.phone_number, value.email)
                 return AuthMiddleware.generateToken({user});
             } else {
                 throw new Error("User doesn't exist");
             }
         } catch (e) {
-            throw e;
+            throw new Error(`Error in userLoginService: ${e.message}`);
         }
     }
 
-    async addUserService(userDto: GetUserDto): Promise<any> {
+    async addUserService(userDto: SetUserDto): Promise<any> {
         try {
             const userModel = new user({
                 first_name: userDto.firstName,
