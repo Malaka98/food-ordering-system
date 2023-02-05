@@ -23,7 +23,7 @@ export class UserController extends BaseHttpController {
             this.httpContext.response.cookie("access_token", token, {
                 httpOnly: true,
                 sameSite: "none",
-                path: "/api",
+                path: "/",
             });
             return this.json({message: "Ok"}, 200);
         } catch (e) {
