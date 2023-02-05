@@ -1,10 +1,11 @@
 import {model, Schema} from "mongoose";
+import {ObjectId} from "mongodb";
 
 const cartItem = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true
+        default: null
     },
     itemPrice: {
         type: Number,
@@ -19,10 +20,15 @@ const cartItem = new Schema({
 });
 
 const cartSchema = new Schema({
+    id: {
+        type: ObjectId,
+        unique: true,
+        required: true
+    },
     cart: {
         type: [cartItem],
         default: []
     },
 });
 
-export const food = model("cart", cartSchema);
+export const cart = model("carts", cartSchema);
