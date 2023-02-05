@@ -62,7 +62,7 @@ describe("User API Testing", () => {
     try {
       const response = await request(app)
         .post("/api/user/login")
-        .send({username: "root", password: "123"})
+        .send({username: "rootx", password: "123456"})
         .set("Accept", "application/json")
         .expect(200);
       cookie = response.headers["set-cookie"];
