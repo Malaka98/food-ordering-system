@@ -47,7 +47,7 @@ export class UserController extends BaseHttpController {
     public async addUserController(@requestBody() user: SetUserDto): Promise<express.Response> {
         try {
             const result = await this.userService.addUserService(user);
-            return this.json({message: result}, 200);
+            return this.json({message: result}, 201);
         } catch (e) {
             return this.json({message: e.message}, 500);
         }

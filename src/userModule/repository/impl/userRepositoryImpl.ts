@@ -10,10 +10,19 @@ import {cart} from "../../../cartModule/model/cart"
 @injectable()
 export class UserRepositoryImpl implements UserRepository {
     async deleteUserByEmail(email: string): Promise<any> {
+        const session = await mongoose.startSession();
         try {
-            return await user.deleteOne({email: email});
+            session.startTransaction();
+            const getUser = await user.findOne({email: email})
+            await cart.deleteOne({id: getUser._id}, {session})
+            const deletedUser = await user.deleteOne({email: email}, {session});
+            await session.commitTransaction();
+            return deletedUser
         } catch (e) {
+            await session.abortTransaction();
             throw e;
+        } finally {
+            await session.endSession();
         }
     }
 

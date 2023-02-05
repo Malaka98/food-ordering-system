@@ -5,7 +5,6 @@ const cartItem = new Schema({
     name: {
         type: String,
         required: true,
-        unique: true,
         default: null
     },
     itemPrice: {
