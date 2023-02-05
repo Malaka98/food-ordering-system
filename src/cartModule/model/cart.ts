@@ -5,6 +5,7 @@ const cartItem = new Schema({
     name: {
         type: String,
         required: true,
+        unique: true,
         default: null
     },
     itemPrice: {
@@ -29,6 +30,10 @@ const cartSchema = new Schema({
         type: [cartItem],
         default: []
     },
+    totalPrice: {
+        type: Number,
+        default: 0
+    }
 });
 
 export const cart = model("carts", cartSchema);

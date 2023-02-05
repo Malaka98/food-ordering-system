@@ -16,8 +16,11 @@ export class CartController extends BaseHttpController {
     }
 
     public async addItem(item: CartDto, userId: string) {
-        console.log("cart Item: ", item, "userId", userId)
-        return {item, userId}
+        try {
+            return await this.cartService.addItemService(item, userId)
+        } catch (e) {
+            console.log(e.message)
+        }
     }
 
     public async updateItem(item: any, userId: string) {

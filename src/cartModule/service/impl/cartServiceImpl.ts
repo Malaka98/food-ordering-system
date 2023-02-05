@@ -13,16 +13,37 @@ export class CartServiceImpl implements CartService {
         this.cartRepository = cartRepository
     }
 
-    addItemService(item: CartDto): Promise<any> {
-        return Promise.resolve(undefined);
+    async addItemService(item: CartDto, userId: string): Promise<any> {
+        try {
+            let totalPrice = 0
+            const currentUserCart = await this.cartRepository.getCartByUserId(userId)
+            const findItem = currentUserCart.cart.find((element: any) => {
+                if (element.name === item.name) {
+                    element.itemCount = item.itemCount
+                    return element
+                }
+                return null
+            })
+            if (!findItem) {
+                currentUserCart.cart.push(item)
+            }
+
+            currentUserCart.cart.forEach((value: any) => {
+                totalPrice += value.itemPrice * value.itemCount
+            })
+            currentUserCart.totalPrice = totalPrice
+            return await this.cartRepository.updateCartByCurrentUserId(userId, currentUserCart)
+        } catch (e) {
+            throw e
+        }
     }
 
-    deleteItemService(id: any): Promise<any> {
-        return Promise.resolve(undefined);
+    async deleteItemService(id: any): Promise<any> {
+
     }
 
-    updateItemService(item: any): Promise<any> {
-        return Promise.resolve(undefined);
+    async updateItemService(item: any): Promise<any> {
+
     }
 
 }

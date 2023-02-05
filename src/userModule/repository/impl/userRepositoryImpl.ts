@@ -1,5 +1,6 @@
 import {injectable} from "inversify";
 import {ObjectId} from "mongodb";
+import mongoose from "mongoose";
 
 import {user} from "../../model/user";
 import {UserRepository} from "../userRepository";
@@ -33,12 +34,19 @@ export class UserRepositoryImpl implements UserRepository {
     }
 
     async addUser(userModel): Promise<any> {
+        const session = await mongoose.startSession();
         try {
-            const user = await userModel.save();
-            await new cart({id: user._id}).save()
+            session.startTransaction();
+
+            const user = await userModel.save({session});
+            await new cart({id: user._id}).save({session})
+            await session.commitTransaction();
             return user
         } catch (e) {
+            await session.abortTransaction();
             throw e;
+        } finally {
+            await session.endSession();
         }
     }
 }

@@ -1,7 +1,7 @@
 import {CartDto} from "../dto/cartDto";
 
 export interface CartService {
-    addItemService(item: CartDto): Promise<any>
+    addItemService(item: CartDto, userId: string): Promise<any>
 
     updateItemService(item: any): Promise<any>
 
