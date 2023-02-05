@@ -38,12 +38,24 @@ export class CartServiceImpl implements CartService {
         }
     }
 
-    async deleteItemService(id: any): Promise<any> {
+    async deleteItemService(itemName: string, userId: string): Promise<any> {
+        try {
+            let totalPrice = 0
+            const currentUserCart = await this.cartRepository.getCartByUserId(userId)
 
-    }
-
-    async updateItemService(item: any): Promise<any> {
-
+            currentUserCart.cart = currentUserCart.cart.filter((item: any) => {
+                if (item.name !== itemName) {
+                    return item
+                }
+            })
+            currentUserCart.cart.forEach((value: any) => {
+                totalPrice += value.itemPrice * value.itemCount
+            })
+            currentUserCart.totalPrice = totalPrice
+            return await this.cartRepository.updateCartByCurrentUserId(userId, currentUserCart)
+        } catch (e) {
+            throw e
+        }
     }
 
 }

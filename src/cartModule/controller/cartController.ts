@@ -23,12 +23,12 @@ export class CartController extends BaseHttpController {
         }
     }
 
-    public async updateItem(item: any, userId: string) {
-
-    }
-
-    public async deleteItem(id: any) {
-
+    public async deleteItem(itemName: string, userId: string) {
+        try {
+            return await this.cartService.deleteItemService(itemName, userId)
+        } catch (e) {
+            console.log(e.message)
+        }
     }
 
 }

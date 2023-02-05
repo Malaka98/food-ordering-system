@@ -9,11 +9,11 @@ describe("User login and singUp test", () => {
       const response = await request(app)
         .post("/api/user")
         .send({
-          firstName: "Aruna",
+          firstName: "Malaka",
           lastName: "jayakodi",
-          username: "zuko",
-          email: "aruna@gmail.com",
-          address: "Kuliyapitiya",
+          username: "jayakodi",
+          email: "jayakodi@gmail.com",
+          address: "colombo",
           password: "123456",
           phoneNumber: "07771234123",
         })
@@ -28,7 +28,7 @@ describe("User login and singUp test", () => {
   it("user login", function (done) {
     request(app)
       .post("/api/user/login")
-      .send({username: "zuko", password: "123456"})
+      .send({username: "rootx", password: "123456"})
       .set("Accept", "application/json")
       .expect(200)
       .end(function (err, res) {

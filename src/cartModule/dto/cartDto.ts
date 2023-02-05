@@ -12,7 +12,7 @@ export class CartDto {
     @IsNumber()
     @IsNotEmpty()
     public itemCount: number
-    
+
     constructor(name?: string, itemPrice?: number, itemCount?: number) {
         this.name = name;
         this.itemPrice = itemPrice;

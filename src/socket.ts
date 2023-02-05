@@ -27,6 +27,17 @@ cartNameSpace.on("connection", (socket: any) => {
             }
         })
 
+        socket.on("delete-item", async (itemName: string) => {
+
+            try {
+                const cart = await cartController.deleteItem(itemName, user.id)
+                console.log(">>>>>>>>>>>>", cart)
+                socket.emit("get-cart", cart)
+            } catch (e) {
+                console.log(e.message)
+            }
+        })
+
     } catch (e) {
         socket.emit("Unauthorised", {message: `Unauthorised: ${e.message}`})
     }
