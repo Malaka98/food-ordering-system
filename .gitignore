@@ -1,7 +1,7 @@
 .idea
 package-lock.json
 code_quality_result
-test_results
+test_result
 # Logs
 logs
 *.log
