@@ -18,7 +18,6 @@ export const customRoutes = (container: Container) => {
         try {
             const cartController = container.get<CartController>(TYPES.CartController)
             const userId = req.user.user.id
-            console.log(userId)
             const cart = await cartController.getCart(userId)
             res.status(200).json({message: cart})
         } catch (e) {

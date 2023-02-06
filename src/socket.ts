@@ -10,18 +10,21 @@ const chatNameSpace = io.of("/chat")
 const cartNameSpace = io.of("/cart")
 
 cartNameSpace.use(AuthMiddleware.socketAuthenticate)
-cartNameSpace.on("connection", (socket: any) => {
+cartNameSpace.on("connection", async (socket: any) => {
     console.log("Connected")
     try {
-        const cartController = container.get<CartController>(TYPES.CartController)
         const user = socket.request.user
+        const cartController = container.get<CartController>(TYPES.CartController)
+
+        // socket.broadcast.emit("get-cart", cart)
         console.log("*********", user)
         socket.on("add-item", async (data: any) => {
             console.log("call", data)
             try {
-                const cart = await cartController.addItem(data, user.id)
+                await cartController.addItem(data, user.id)
+                const cart = await cartController.getCart(user.id)
                 console.log(">>>>>>>>>>>>", cart)
-                socket.emit("get-cart", cart)
+                cartNameSpace.emit("get-cart", cart)
             } catch (e) {
                 console.log(e.message)
             }
@@ -30,16 +33,27 @@ cartNameSpace.on("connection", (socket: any) => {
         socket.on("delete-item", async (itemName: string) => {
 
             try {
-                const cart = await cartController.deleteItem(itemName, user.id)
+                await cartController.deleteItem(itemName, user.id)
+                const cart = await cartController.getCart(user.id)
                 console.log(">>>>>>>>>>>>", cart)
-                socket.emit("get-cart", cart)
+                cartNameSpace.emit("get-cart", cart)
+            } catch (e) {
+                console.log(e.message)
+            }
+        })
+
+        socket.on("get-current-cart", async () => {
+            try {
+                const cart = await cartController.getCart(user.id)
+                console.log(">>>>>>>>>>>>", cart)
+                cartNameSpace.emit("get-cart", cart)
             } catch (e) {
                 console.log(e.message)
             }
         })
 
     } catch (e) {
-        socket.emit("Unauthorised", {message: `Unauthorised: ${e.message}`})
+        cartNameSpace.emit("Unauthorised", {message: `Unauthorised: ${e.message}`})
     }
 })
 chatNameSpace.on("connection", (socket: any) => {
@@ -54,7 +68,7 @@ chatNameSpace.on("connection", (socket: any) => {
             chatNameSpace.in(data.room).emit('new message', {user: data.user, message: data.message});
         });
     } catch (e) {
-        socket.emit("401", {message: `Unauthorised: ${e.message}`})
+        chatNameSpace.emit("401", {message: `Unauthorised: ${e.message}`})
     }
 })
 
