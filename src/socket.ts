@@ -3,6 +3,7 @@ import {container} from "./index";
 import {CartController} from "./cartModule/controller/cartController";
 import {TYPES} from "./types";
 import {AuthMiddleware} from "./middlewares/authMiddleware";
+import {CartDto} from "./cartModule/dto/cartDto";
 
 const io = new Server();
 
@@ -16,12 +17,9 @@ cartNameSpace.on("connection", async (socket: any) => {
         const user = socket.request.user
         const cartController = container.get<CartController>(TYPES.CartController)
 
-        // socket.broadcast.emit("get-cart", cart)
-        console.log("*********", user)
         socket.on("add-item", async (data: any) => {
-            console.log("call", data)
             try {
-                await cartController.addItem(data, user.id)
+                await cartController.addItem(new CartDto(data.foodId, data.itemCount), user.id)
                 const cart = await cartController.getCart(user.id)
                 console.log(">>>>>>>>>>>>", cart)
                 cartNameSpace.emit("get-cart", cart)

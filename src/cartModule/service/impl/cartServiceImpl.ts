@@ -20,18 +20,26 @@ export class CartServiceImpl implements CartService {
     async addItemService(item: CartDto, userId: string): Promise<any> {
         try {
             let totalPrice = 0
-
+            let itemIndex = 0
             const food = await this.foodRepository.getFoodById(item.foodId)
+            console.log(food)
             const currentUserCart = await this.cartRepository.getCartByUserId(userId)
-            const findItem = currentUserCart.cart.find((element: any) => {
+            const findItem = currentUserCart.cart.find((element: any, index: number) => {
                 if (element.name === food.name) {
                     element.itemCount = item.itemCount
+                    itemIndex = index
                     return element
                 }
                 return null
             })
+
+            if (findItem) {
+                currentUserCart.cart[itemIndex] = findItem
+            }
+
             if (!findItem) {
                 currentUserCart.cart.push({
+                    id: food._id,
                     name: food.name,
                     itemPrice: food.price,
                     itemUri: food.imgUri,
