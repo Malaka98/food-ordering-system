@@ -3,19 +3,14 @@ import {IsNotEmpty, IsNumber, IsString} from "class-validator";
 export class CartDto {
     @IsString()
     @IsNotEmpty()
-    public name: string
-
-    @IsNumber()
-    @IsNotEmpty()
-    public itemPrice: number
+    public foodId: string
 
     @IsNumber()
     @IsNotEmpty()
     public itemCount: number
 
-    constructor(name?: string, itemPrice?: number, itemCount?: number) {
-        this.name = name;
-        this.itemPrice = itemPrice;
+    constructor(foodId?: string, itemPrice?: number, itemCount?: number) {
+        this.foodId = foodId;
         this.itemCount = itemCount;
     }
 }

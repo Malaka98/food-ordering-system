@@ -31,4 +31,12 @@ export class CartController extends BaseHttpController {
         }
     }
 
+    public async getCart(userId: string) {
+        try {
+            return await this.cartService.getCartByUserIdService(userId)
+        } catch (e) {
+            throw e
+        }
+    }
+
 }

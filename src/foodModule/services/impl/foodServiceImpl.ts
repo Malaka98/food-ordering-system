@@ -47,7 +47,7 @@ export class FoodServiceImpl implements FoodService {
 
     async getFoodByIdService(id: string): Promise<any> {
         try {
-
+            return await this.foodRepository.getFoodById(id)
         } catch (e) {
             throw e
         }

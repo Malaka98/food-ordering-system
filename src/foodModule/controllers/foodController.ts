@@ -43,4 +43,15 @@ export class FoodController extends BaseHttpController {
         }
     }
 
+    @httpGet("/:foodId")
+    public async getFoodByIdController(): Promise<express.Response> {
+        try {
+            const foodId = this.httpContext.request.params.foodId
+            const food = await this.foodService.getFoodByIdService(foodId)
+            return this.json({message: food}, 200)
+        } catch (e) {
+            return this.json({message: e.message}, 500);
+        }
+    }
+
 }

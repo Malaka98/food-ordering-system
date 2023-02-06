@@ -5,11 +5,14 @@ const cartItem = new Schema({
     name: {
         type: String,
         required: true,
-        default: null
     },
     itemPrice: {
         type: Number,
         default: 0,
+        required: true
+    },
+    itemUri: {
+        type: String,
         required: true
     },
     itemCount: {

@@ -1,13 +1,13 @@
-import {IsDataURI, IsNotEmpty, IsString} from "class-validator";
+import {IsDataURI, IsNotEmpty, IsNumber, IsString} from "class-validator";
 
 export class FoodDto {
     @IsString()
     @IsNotEmpty()
     public name: string
 
-    @IsString()
+    @IsNumber()
     @IsNotEmpty()
-    public price: string
+    public price: number
 
     @IsString()
     @IsNotEmpty()
@@ -21,7 +21,7 @@ export class FoodDto {
     @IsNotEmpty()
     public description: string
 
-    constructor(name?: string, price?: string, category?: string, imgUri?: string, description?: string) {
+    constructor(name?: string, price?: number, category?: string, imgUri?: string, description?: string) {
         this.name = name;
         this.price = price;
         this.category = category;

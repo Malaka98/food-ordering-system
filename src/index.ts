@@ -15,6 +15,7 @@ import UserModule from "./userModule/userModule";
 import FoodModule from "./foodModule/foodModule";
 import io from './socket'
 import CartModule from "./cartModule/cartModule";
+import {customRoutes} from "./routes/route";
 
 config();
 const corsOptions = {
@@ -38,8 +39,8 @@ Database.connect();
 
 const container = new Container();
 container.load(UserModule, FoodModule, CartModule);
-
-const server = new InversifyExpressServer(container, null, {rootPath: "/api"});
+const router = customRoutes(container)
+const server = new InversifyExpressServer(container, router, {rootPath: "/api"});
 server.setConfig((app) => {
     // add your express middlewares here
     // add body parser
