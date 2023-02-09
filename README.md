@@ -1,5 +1,7 @@
 [![CircleCI](https://dl.circleci.com/status-badge/img/gh/Malaka98/food-ordering-system/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/Malaka98/food-ordering-system/tree/main)
 
+[![CircleCI](https://dl.circleci.com/insights-snapshot/gh/Malaka98/food-ordering-system/main/build_and_deploy/badge.svg?window=90d)](https://app.circleci.com/insights/github/Malaka98/food-ordering-system/workflows/build_and_deploy/overview?branch=main&reporting-window=last-90-days&insights-snapshot=true)
+
 # **Full Stack Project Backend**
 
 ### This web service has been developed using Express
@@ -29,3 +31,69 @@ itself. This makes it easier to test components in isolation and to change the i
 affecting the rest of the system.
 
 **The inversify library has been used to implement an IOC container on a node express server**
+
+## Installation
+
+Full Stack Project Backend system requires [Node.js](https://nodejs.org/) v16+ to run.
+
+Install the dependencies and devDependencies and start the server.
+
+```sh
+cd Full Stack Project Backend
+npm install
+```
+
+Add the following environment variables in the .env file:
+
+```sh
+  MONGO_USER=<MongoDb Username>
+  MONGO_PASSWORD=<MongoDb Password>
+  MONGO_PATH=cluster0.6pjjs4p.mongodb.net/<atless db name>?retryWrites=true&w=majority
+  PORT=<PORT Number>
+  JWT_SECRET=<my-secret>
+  ORIGIN_URL=<http://localhost:4200>
+```
+
+To run the application in the development environment:
+
+```sh
+npm dev
+```
+
+To run ESLint code analysis:
+
+```sh
+npm lint
+```
+
+To run the test cases:
+
+```sh
+npm test
+```
+
+To build the application:
+
+```sh
+npm build
+```
+
+To run the built application:
+
+```sh
+npm start
+```
+
+## Docker
+
+Full Stack Project Backend is very easy to install and deploy in a Docker container.
+
+By default, the Docker will expose port 8080, so change this within the
+Dockerfile if necessary. When ready, simply use the Dockerfile to
+build the image.
+
+```sh
+cd Full Stack Project Backend
+sudo docker build -t my-app .
+sudo docker run -p 4000:4000 my-app
+```
