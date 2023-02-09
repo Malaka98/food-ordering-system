@@ -97,3 +97,56 @@ cd Full Stack Project Backend
 sudo docker build -t my-app .
 sudo docker run -p 4000:4000 my-app
 ```
+## API documentation
+
+**BASE_URL/api/user [Method: POST]**
+
+*Add User (sample request)*
+```http request
+    http://localhost:4000/api/user
+```
+```json
+    {
+        "firstName": "Malaka",
+        "lastName": "Jayakodi",
+        "username": "rootx",
+        "email": "rootx.6506@gmail.com",
+        "address": "Kuliyapitiya",
+        "password": "123456",
+        "phoneNumber": "07771234567"
+    }
+```
+
+**BASE_URL/api/user/login [Method: POST]**
+
+*Login (sample request)*
+```http request
+    http://localhost:4000/api/user/login
+```
+```json
+    {
+        "username": "rootx",
+        "password": "123456"
+    }
+```
+
+**BASE_URL/api/user [Method: GET]**
+
+*Check user is logged (sample request)*
+```http request
+   http://localhost:4000/api/user
+```
+
+**BASE_URL/api/user/:userId [Method: GET]**
+
+*Get User By Id (sample request)*
+```http request
+   http://localhost:4000/api/user/63e0a78a8b31416179ac08d0
+```
+
+**BASE_URL/api/user/:email [Method: DELETE]**
+
+*Delete user by email (sample request)*
+```http request
+  http://localhost:4000/api/user/jayakodi@gmail.com
+```
