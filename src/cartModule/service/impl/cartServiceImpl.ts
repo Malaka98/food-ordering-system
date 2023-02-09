@@ -21,6 +21,7 @@ export class CartServiceImpl implements CartService {
         try {
             let totalPrice = 0
             let itemIndex = 0
+            let totalItem = 0
             const food = await this.foodRepository.getFoodById(item.foodId)
             console.log(food)
             const currentUserCart = await this.cartRepository.getCartByUserId(userId)
@@ -49,8 +50,10 @@ export class CartServiceImpl implements CartService {
 
             currentUserCart.cart.forEach((value: any) => {
                 totalPrice += value.itemPrice * value.itemCount
+                totalItem += value.itemCount
             })
             currentUserCart.totalPrice = totalPrice
+            currentUserCart.totalItem = totalItem
             return await this.cartRepository.updateCartByCurrentUserId(userId, currentUserCart)
         } catch (e) {
             throw new Error(`Cart Service Layer: ${e}`)
