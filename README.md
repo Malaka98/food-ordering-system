@@ -2,7 +2,7 @@
 
 [![CircleCI](https://dl.circleci.com/insights-snapshot/gh/Malaka98/food-ordering-system/main/build_and_deploy/badge.svg?window=90d)](https://app.circleci.com/insights/github/Malaka98/food-ordering-system/workflows/build_and_deploy/overview?branch=main&reporting-window=last-90-days&insights-snapshot=true)
 
-# **Full Stack Project Backend**
+# **Full Stack Project Backend - PUSL3120**
 
 ### This web service has been developed using Express
 
