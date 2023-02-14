@@ -6,4 +6,6 @@ export interface CartService {
     deleteItemService(itemName: string, userId: string): Promise<any>
 
     getCartByUserIdService(userId: string): Promise<any>
+
+    checkoutService(orderDetail: any, userId: string): Promise<any>
 }

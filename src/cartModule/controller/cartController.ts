@@ -39,4 +39,12 @@ export class CartController extends BaseHttpController {
         }
     }
 
+    public async checkout(orderDetails: any, userId: string) {
+        try {
+            return await this.cartService.checkoutService(orderDetails, userId)
+        } catch (e) {
+            throw e
+        }
+    }
+
 }

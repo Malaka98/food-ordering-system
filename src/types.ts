@@ -10,6 +10,7 @@ const TYPES = {
     CartRepository: Symbol.for("CartRepository"),
     CartService: Symbol.for("CartService"),
     CartController: Symbol.for("CartController"),
+    CheckoutRepository: Symbol.for("CheckoutRepository")
 };
 
 export {TYPES};
