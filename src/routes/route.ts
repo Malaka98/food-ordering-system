@@ -31,9 +31,20 @@ export const customRoutes = (container: Container) => {
         try {
             const cartController = container.get<CartController>(TYPES.CartController)
             const userId = req.user.user.id
-            const orderDetail = new OrderDto(req.body["payment"], req.body["order"])
+            const orderDetail = new OrderDto(req.body["order"], req.body["payment"])
             const checkout = await cartController.checkout(orderDetail, userId)
             res.status(201).json({message: checkout})
+        } catch (e) {
+            res.status(400).json({message: e.message})
+        }
+    })
+
+    router.get('/order-history', AuthMiddleware.authenticate, async (req: express.Request, res: express.Response) => {
+        try {
+            const cartController = container.get<CartController>(TYPES.CartController)
+            const userId = req.user.user.id
+            const orderHistory = await cartController.getOrderHistory(userId)
+            res.status(200).json({message: orderHistory})
         } catch (e) {
             res.status(400).json({message: e.message})
         }

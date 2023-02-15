@@ -107,5 +107,13 @@ export class CartServiceImpl implements CartService {
         }
     }
 
+    async getOrderHistoryService(userId: string): Promise<any> {
+        try {
+            return await this.checkoutRepository.getOrderHistoryByUserId(userId)
+        } catch (e) {
+            throw e
+        }
+    }
+
 
 }

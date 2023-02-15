@@ -4,7 +4,6 @@ import {ObjectId} from "mongodb";
 const checkoutSchema = new Schema({
     userId: {
         type: ObjectId,
-        unique: true,
         required: true
     },
     orderDetails: {

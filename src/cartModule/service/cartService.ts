@@ -8,4 +8,6 @@ export interface CartService {
     getCartByUserIdService(userId: string): Promise<any>
 
     checkoutService(orderDetail: any, userId: string): Promise<any>
+
+    getOrderHistoryService(userId: string): Promise<any>
 }

@@ -29,4 +29,12 @@ export class CheckoutRepositoryImpl implements CheckoutRepository {
         }
     }
 
+    async getOrderHistoryByUserId(userId: string): Promise<any> {
+        try {
+            return await checkout.find({userId: userId})
+        } catch (e) {
+            throw e
+        }
+    }
+
 }

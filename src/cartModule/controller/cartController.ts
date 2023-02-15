@@ -47,4 +47,12 @@ export class CartController extends BaseHttpController {
         }
     }
 
+    public async getOrderHistory(userId: string) {
+        try {
+            return await this.cartService.getOrderHistoryService(userId)
+        } catch (e) {
+            throw e
+        }
+    }
+
 }
